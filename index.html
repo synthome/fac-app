@@ -116,6 +116,7 @@
 
 body {
   font: 15px arial;
+  background-color: white;
 }
 
 p {
@@ -144,6 +145,7 @@ a {
 }
 
 .statement {
+  background-color: #eeeeee;
   padding: 20px;
   border-radius: 10px;
   border: 1px solid grey;
@@ -166,13 +168,7 @@ a {
 
 #mugshot img {
   max-height: calc(10*var(--LINE_HEIGHT));
-}
-
-.slideshow-container {
-  max-width: calc(5 * var(--IMAGE_HALF_WIDTH));
-  position: relative;
-  margin: auto;
-  overflow: hidden;
+  border: 1px solid grey;
 }
 
 .button.play, .button.pause {
@@ -226,8 +222,9 @@ a {
   display: block;
   position: relative;
   overflow: hidden;
-  margin: 0px 10px 10px 10px;
+  margin: var(--LINE_HEIGHT) 0px 0px 0px;
   padding-top: 0px;
+  border: 1px solid grey;
   cursor: pointer;
 }
 #image-carousel {
@@ -262,8 +259,8 @@ a {
   top: 0;
   bottom: 0;
   width: calc(50% - 2*var(--IMAGE_HALF_WIDTH));
-  z-index: 100;
-  background-color: #ffffff;
+  z-index: 200;
+  background-color: white;
 }
 .carousel-obscurer.right {
   left: auto;
@@ -316,8 +313,7 @@ a {
     <p>So, he would like to make a fresh start, building once again from the ground up, but this time learning with others, instead of, mostly, on his own. It’s never too late - or so he hopes!</p>
     <p>Evidence of his coding ability can be found on <a href="https://www.freecodecamp.org/synthome" target="_blank">freeCodeCamp</a> and <a href="https://www.codewars.com/users/synthome" target="_blank">CodeWars</a>.</p>
     <p>The repository for this webpage can be found on <a href="https://github.com/synthome/fac-app" target="_blank">GitHub</a>.</p>
-  </div>
-  <div class="comment">...and here's some bark (Saul is very fond of bark)</div>
+    <p>And here's some bark (Saul is very fond of bark):</p>
   <div id="carousel-container">
     <div class="carousel-obscurer"></div>
     <div class="carousel-frost"></div>
@@ -334,5 +330,6 @@ a {
     <div id="play-pause" class="button play"></div>
     <div id="next" class="button next"></div>
   </div>
+</div>
 </body>
 </html>
