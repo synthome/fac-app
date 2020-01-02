@@ -1,4 +1,295 @@
-<doctype html/>
+<!DOCTYPE html>
 <html>
-Hello, World!
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script>
+    const WIDTH = 150;
+    const DURATION1 = 1000;
+    const DURATION2 = 1000;
+    const DURATION3 = 5;
+    let playing = false;
+    let pausing = false;
+
+    function initialize() {
+      document.getElementById("prev").onclick = function(e) { e.stopPropagation(); slidePrev(); }
+      document.getElementById("play_pause").onclick = function(e) { e.stopPropagation(); playPause(); }
+      document.getElementById("next").onclick = function(e) { e.stopPropagation(); slideNext(); }
+      document.onkeydown = function(e) { onKeyDown(e); }
+    }
+
+    function onKeyDown(e) {
+      switch (e.code) {
+        case "ArrowLeft":
+          slidePrev();
+          return;
+        case "ArrowRight":
+          slideNext();
+          return;
+        default:
+          return;
+      }
+    }
+
+    function slide(dir, repeat) {
+      let ic = document.getElementById("image-carousel");
+      let cc = document.getElementById("carousel-container");
+      let ml1 = "calc(50% - " + (5*WIDTH) + "px)";
+      let ml2 = "calc(50% - " + ((dir == 1 ? 7 : 3)*WIDTH) + "px)";
+      slideEnd = function() {
+        ic.animate([{ marginLeft: ml2 }, { marginLeft: ml1 }], { duration: 0, fill: "forwards" });
+        if (dir == 1) {
+          ic.appendChild(ic.removeChild(ic.getElementsByTagName("li")[0]), ic.getElementsByTagName("li")[3]);
+        }
+        else {
+          ic.insertBefore(ic.removeChild(ic.getElementsByTagName("li")[4]), ic.getElementsByTagName("li")[0]);
+        }
+        if (repeat) {
+          if (playing) {
+            setTimeout(function() { slide(dir, repeat); }, DURATION2);
+          }
+          else {
+            pausing = false;
+          }
+        }
+        else {
+          playing = false;
+        }
+      }
+      if (!repeat || playing) {
+        ic.animate([{ marginLeft: ml1 }, { marginLeft: ml2 }], { duration: DURATION1, fill: "forwards" });
+        setTimeout(slideEnd, DURATION1 + DURATION3);
+      }
+      else {
+        pausing = false;
+      }
+    }
+
+    function playPause() {
+      if (playing && !pausing) {
+        togglePlayPauseButtons();
+        pausing = true;
+        playing = false;
+      }
+      else if (!playing && !pausing) {
+        togglePlayPauseButtons();
+        playing = true;
+      }
+      if (playing) {
+        slide(1, true);
+      }
+    }
+    
+    function slideNext() {
+      if (!playing) {
+        playing = true;
+        slide(1, false);
+      }
+    }
+
+    function slidePrev() {
+      if (!playing) {
+        playing = true;
+        slide(-1, false);
+      }
+    }
+
+    function togglePlayPauseButtons() {
+      document.getElementById("play_pause").classList.toggle("play");
+      document.getElementById("play_pause").classList.toggle("pause");
+    }
+
+    function toggleButtons() {
+      let btns = document.getElementsByClassName("button");
+      for (i = 0; i < btns.length; i++) {
+        btns[i].style.display = (btns[i].style.display == "none" ? "block" : "none");
+      }
+    }
+  </script>
+<style>
+  * {box-sizing:border-box}
+
+:root {
+  --WIDTH: 150px;
+  --LINEHEIGHT: 20px;
+}
+
+body {
+  font: 15px arial;
+}
+
+p {
+  margin: var(--LINEHEIGHT) 0px 0px 0px;
+  text-align:justify;
+}
+
+p.start {
+  margin-top: 0px;
+}
+
+a {
+  font-weight: bold;
+  color: blue;
+}
+
+.statement {
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid grey;
+  margin: 10px auto;
+  max-width: calc(6*var(--WIDTH));
+  line-height: var(--LINEHEIGHT);
+}
+
+#mugshot {
+  float: left;
+  max-height: calc(9*var(--LINEHEIGHT));
+  margin: 0px 20px 20px 0px;
+}
+
+.slideshow-container {
+  max-width: calc(5 * var(--WIDTH));
+  position: relative;
+  margin: auto;
+  overflow: hidden;
+}
+
+.button.play, .button.pause {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -10px;
+  margin-top: -10px;
+  box-sizing: border-box;
+  width: 20px;
+  height: 20px;
+  border-color: transparent transparent transparent blue;
+  opacity: 0.5;
+}
+
+.button.play {
+  border-style: solid;
+  border-width: 10px 0px 10px 20px;
+}
+
+.button.pause {
+  border-style: double;
+  border-width: 0px 0px 0px 20px;
+}
+
+.button.prev, .button.next {
+  z-index: 200;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  margin-top: -10px;
+  box-sizing: border-box;
+  width: 10px;
+  height: 20px;
+  opacity: 0.5;
+  border-style: solid;
+}
+
+.button.prev {
+  border-width: 10px 10px 10px 0px;
+  border-color: transparent blue transparent transparent;
+  left: calc(50% - var(--WIDTH) - 15px);
+}
+
+.button.next {
+  border-width: 10px 0px 10px 10px;
+  border-color: transparent transparent transparent blue;
+  right: calc(50% - var(--WIDTH) - 15px);
+}
+
+#carousel-container {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  margin: 10px;
+}
+#image-carousel {
+  width: calc(10*var(--WIDTH));
+  padding: 0;
+  list-style: none;
+  text-indent: 0;
+  display: block;
+  margin-left: calc(50% - 5*var(--WIDTH));
+  margin-top: 0px;
+  margin-bottom: 0px;
+  line-height: 0px;
+}
+#image-carousel li {
+  float: left;
+  width: calc(2*var(--WIDTH));
+  position: relative;
+  cursor: pointer;
+}
+#image-carousel img {
+  width: calc(2*var(--WIDTH));
+}
+#image-carousel:after {
+  visibility: hidden;
+  display: block;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+.carousel-obscurer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: calc(50% - 3*var(--WIDTH));
+  z-index: 100;
+  background-color: #ffffff;
+}
+.carousel-obscurer.right {
+  left: auto;
+  right: 0;
+}
+.carousel-frost {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: calc(2*var(--WIDTH));
+  margin-left: calc(50% - 3*var(--WIDTH));
+  z-index: 100;
+  background-color: #ffffff;
+  opacity: .6;
+}
+.carousel-frost.right {
+  left: auto;
+  margin-left: auto;
+  right: 0;
+  margin-right: calc(50% - 3*var(--WIDTH));
+}
+</style>
+</head>
+<body onload="initialize()">
+  <div class="statement">
+    <img id="mugshot" src="Images/20180831_154555.jpg">
+    <p class="start">Learning to code at Founders and Coders would represent, for me, a new beginning. I already have experience as a coder, but almost all of my time was spent at the same company, ploughing a narrower and narrower furrow, working in my final few years on a windows forms application solely for use in-house. I chose to step out of the workplace nearly two years ago, when the company was taken over and a voluntary redundancy package was made available to the employees.</po the workplace, I have found it very difficult to get interviews, perhaps because of my age (50), and/or the length of time I have been out of work, and/or not being sufficiently abreast of the latest coding and working methodologies, and/or being entirely self-taught – I have no coding-related qualifications.</p>    
+    <p>So, I would like to make a fresh start, building once again from the ground up, but this time learning with others instead of on my own.</p>
+    <p>It’s never too late - I hope.</p>
+    <p>Evidence of my coding ability can be found on <a href="https://www.freecodecamp.org/synthome">freeCodeCamp</a> and <a href="https://www.codewars.com/users/synthome">CodeWars</a>.</p>
+  </div>
+  <div id="carousel-container"  onclick="javascript:toggleButtons()" style="background-color: red; padding-top: 0px; margin-top: 0px;">
+    <div class="carousel-obscurer"></div>
+    <div class="carousel-frost"></div>
+    <div class="carousel-frost right"></div>
+    <div class="carousel-obscurer right"></div>
+    <ul id="image-carousel" style="display: block">
+      <li><img src="Images/20191224_143754_resized.jpg"></li>
+      <li><img src="Images/20191224_144119_resized.jpg"></li>
+      <li><img src="Images/20191224_145110_resized.jpg"></li>
+      <li><img src="Images/20191224_145247_resized.jpg"></li>
+      <li><img src="Images/20191224_145324_resized.jpg"></li>
+    </ul>
+    <div id="prev" class="button prev"></div>
+    <div id="play_pause" class="button play"></div>
+    <div id="next" class="button next"></div>
+  </div>
+</body>
 </html>
