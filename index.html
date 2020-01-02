@@ -10,10 +10,11 @@
     let pausing = false;
 
     function initialize() {
-      document.getElementById("prev").onclick = function(e) { e.stopPropagation(); slidePrev(); }
-      document.getElementById("play_pause").onclick = function(e) { e.stopPropagation(); playPause(); }
-      document.getElementById("next").onclick = function(e) { e.stopPropagation(); slideNext(); }
-      document.onkeydown = function(e) { onKeyDown(e); }
+      document.getElementById("carousel-container").onclick = function() { toggleButtons(); };
+      document.getElementById("prev").onclick = function(e) { e.stopPropagation(); slidePrev(); };
+      document.getElementById("play-pause").onclick = function(e) { e.stopPropagation(); playPause(); };
+      document.getElementById("next").onclick = function(e) { e.stopPropagation(); slideNext(); };
+      document.onkeydown = function(e) { onKeyDown(e); };
     }
 
     function onKeyDown(e) {
@@ -93,8 +94,8 @@
     }
 
     function togglePlayPauseButtons() {
-      document.getElementById("play_pause").classList.toggle("play");
-      document.getElementById("play_pause").classList.toggle("pause");
+      document.getElementById("play-pause").classList.toggle("play");
+      document.getElementById("play-pause").classList.toggle("pause");
     }
 
     function toggleButtons() {
@@ -168,17 +169,6 @@ a {
   max-height: calc(10*var(--LINE_HEIGHT));
 }
 
-@media(max-width: 1024px) {
-  #mugshot {
-    float: none;
-    min-height: calc(10*var(--LINE_HEIGHT));
-    margin: 0px 10px 5px 0px;
-  }
-  p.second {
-    margin-top: var(--LINE_HEIGHT);
-  }
-}
-
 .slideshow-container {
   max-width: calc(5 * var(--IMAGE_HALF_WIDTH));
   position: relative;
@@ -187,7 +177,6 @@ a {
 }
 
 .button.play, .button.pause {
-  cursor: pointer;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -212,7 +201,6 @@ a {
 
 .button.prev, .button.next {
   z-index: 200;
-  cursor: pointer;
   position: absolute;
   top: 50%;
   margin-top: calc(-1*var(--BUTTON_HEIGHT)/2);
@@ -241,6 +229,7 @@ a {
   overflow: hidden;
   margin: 0px 10px 10px 10px;
   padding-top: 0px;
+  cursor: pointer;
 }
 #image-carousel {
   width: calc(10*var(--IMAGE_HALF_WIDTH));
@@ -257,7 +246,6 @@ a {
   float: left;
   width: calc(2*var(--IMAGE_HALF_WIDTH));
   position: relative;
-  cursor: pointer;
 }
 #image-carousel img {
   width: calc(2*var(--IMAGE_HALF_WIDTH));
@@ -299,6 +287,20 @@ a {
   right: 0;
   margin-right: calc(50% - 3*var(--IMAGE_HALF_WIDTH));
 }
+
+@media(max-width: 1024px) {
+  #mugshot {
+    float: none;
+    min-height: calc(10*var(--LINE_HEIGHT));
+    margin: 0px 10px 5px 0px;
+  }
+  .statement {
+    max-width: calc(6*var(--IMAGE_HALF_WIDTH));
+  }
+  p.second {
+    margin-top: var(--LINE_HEIGHT);
+  }
+}
 </style>
 </head>
 <body onload="initialize()">
@@ -313,7 +315,7 @@ a {
     <p>The repository for this website can be found on <a href="https://github.com/synthome/fac-app" target="_blank">GitHub</a>.</p>
   </div>
   <div class="comment">And here's some bark</div>
-  <div id="carousel-container"  onclick="javascript:toggleButtons()">
+  <div id="carousel-container">
     <div class="carousel-obscurer"></div>
     <div class="carousel-frost"></div>
     <div class="carousel-frost right"></div>
@@ -326,7 +328,7 @@ a {
       <li><img src="Images/20191224_145324_resized.jpg"></li>
     </ul>
     <div id="prev" class="button prev"></div>
-    <div id="play_pause" class="button play"></div>
+    <div id="play-pause" class="button play"></div>
     <div id="next" class="button next"></div>
   </div>
 </body>
