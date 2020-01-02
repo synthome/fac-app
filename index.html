@@ -119,7 +119,6 @@ body {
 
 p {
   margin: var(--LINE_HEIGHT) 0px 0px 0px;
-  text-align:justify;
 }
 
 p.start {
@@ -136,14 +135,36 @@ a {
   border-radius: 10px;
   border: 1px solid grey;
   margin: 10px auto;
-  max-width: calc(6*var(--IMAGE_HALF_WIDTH));
+  max-width: calc(4*var(--IMAGE_HALF_WIDTH));
   line-height: var(--LINE_HEIGHT);
+}
+
+.comment {
+  margin: 10px auto;
+  max-width: calc(6*var(--IMAGE_HALF_WIDTH));
+  font-weight: bold;
+  text-align: center;
 }
 
 #mugshot {
   float: left;
-  max-height: calc(9*var(--LINE_HEIGHT));
-  margin: 0px 20px 20px 0px;
+  max-height: calc(10*var(--LINE_HEIGHT));
+  margin: 0px 20px 5px 0px;
+}
+
+@media(max-width: 768px) {
+  :root {
+    --IMAGE_HALF_WIDTH: 150px;
+    --LINE_HEIGHT: 15px;
+    --BUTTON_HEIGHT: 40px;
+  }
+  body {
+    font-size: 10px;
+  }
+  #mugshot {
+    min-height: calc(10*var(--LINE_HEIGHT));
+    margin: 0px 10px 5px 0px;
+  }
 }
 
 .slideshow-container {
@@ -241,7 +262,7 @@ a {
   left: 0;
   top: 0;
   bottom: 0;
-  width: calc(50% - 3*var(--IMAGE_HALF_WIDTH));
+  width: calc(50% - 2*var(--IMAGE_HALF_WIDTH));
   z-index: 100;
   background-color: #ffffff;
 }
@@ -258,7 +279,7 @@ a {
   margin-left: calc(50% - 3*var(--IMAGE_HALF_WIDTH));
   z-index: 100;
   background-color: #ffffff;
-  opacity: .6;
+  opacity: .8;
 }
 .carousel-frost.right {
   left: auto;
@@ -271,11 +292,13 @@ a {
 <body onload="initialize()">
   <div class="statement">
     <img id="mugshot" src="Images/20180831_154555.jpg">
-    <p class="start">Learning to code at Founders and Coders would represent, for me, a new beginning. I already have experience as a coder, but almost all of my time was spent at the same company, ploughing a narrower and narrower furrow, working in my final few years on a windows forms application solely for use in-house. I chose to step out of the workplace nearly two years ago, when the company was taken over and a voluntary redundancy package was made available to the employees.</po the workplace, I have found it very difficult to get interviews, perhaps because of my age (50), and/or the length of time I have been out of work, and/or not being sufficiently abreast of the latest coding and working methodologies, and/or being entirely self-taught – I have no coding-related qualifications.</p>    
-    <p>So, I would like to make a fresh start, building once again from the ground up, but this time learning with others instead of on my own.</p>
-    <p>It’s never too late - I hope.</p>
+    <p class="start">Learning to code at Founders and Coders would represent, for me, a new beginning. I already have experience as a coder, but almost all of my time was spent at the same company, ploughing a narrower and narrower furrow and working in my final few years on a windows forms application solely for use in-house.</p>
+    <p>I chose to step out of the workplace nearly two years ago when the company was taken over and a voluntary redundancy package was made available to the employees.</po the workplace, I have found it very difficult to get interviews, perhaps because of my age (50), and/or the length of time I have been out of work, and/or not being sufficiently abreast of the latest coding and working methodologies, and/or being entirely self-taught – I have no coding-related qualifications.</p>    
+    <p>Now, I would like to make a fresh start, building once again from the ground up, but this time learning with others instead of on my own. It’s never too late - I hope.</p>
     <p>Evidence of my coding ability can be found on <a href="https://www.freecodecamp.org/synthome" target="_blank">freeCodeCamp</a> and <a href="https://www.codewars.com/users/synthome" target="_blank">CodeWars</a>.</p>
+    <p>The repository for this website can be found on <a href="https://github.com/synthome/fac-app" target="_blank">GitHub</a>.</p>
   </div>
+  <div class="comment">And here's some bark</div>
   <div id="carousel-container"  onclick="javascript:toggleButtons()">
     <div class="carousel-obscurer"></div>
     <div class="carousel-frost"></div>
