@@ -121,8 +121,20 @@ p {
   margin: var(--LINE_HEIGHT) 0px 0px 0px;
 }
 
-p.start {
+p.first {
   margin-top: 0px;
+}
+
+p.second {
+  margin-top: 0px;
+}
+
+p.first::after {
+  visibility: hidden;
+  display: block;
+  content: " ";
+  clear: both;
+  height: 0;
 }
 
 a {
@@ -148,22 +160,22 @@ a {
 
 #mugshot {
   float: left;
-  max-height: calc(10*var(--LINE_HEIGHT));
   margin: 0px 20px 5px 0px;
+  text-align: center;
 }
 
-@media(max-width: 768px) {
-  :root {
-    --IMAGE_HALF_WIDTH: 150px;
-    --LINE_HEIGHT: 15px;
-    --BUTTON_HEIGHT: 40px;
-  }
-  body {
-    font-size: 10px;
-  }
+#mugshot img {
+  max-height: calc(10*var(--LINE_HEIGHT));
+}
+
+@media(max-width: 1024px) {
   #mugshot {
+    float: none;
     min-height: calc(10*var(--LINE_HEIGHT));
     margin: 0px 10px 5px 0px;
+  }
+  p.second {
+    margin-top: var(--LINE_HEIGHT);
   }
 }
 
@@ -291,9 +303,11 @@ a {
 </head>
 <body onload="initialize()">
   <div class="statement">
-    <img id="mugshot" src="Images/20180831_154555.jpg">
-    <p class="start">Learning to code at Founders and Coders would represent, for me, a new beginning. I already have experience as a coder, but almost all of my time was spent at the same company, ploughing a narrower and narrower furrow and working in my final few years on a windows forms application solely for use in-house.</p>
-    <p>I chose to step out of the workplace nearly two years ago when the company was taken over and a voluntary redundancy package was made available to the employees.</po the workplace, I have found it very difficult to get interviews, perhaps because of my age (50), and/or the length of time I have been out of work, and/or not being sufficiently abreast of the latest coding and working methodologies, and/or being entirely self-taught – I have no coding-related qualifications.</p>    
+    <div id="mugshot">
+      <img src="Images/20180831_154555.jpg">
+    </div>
+    <p class="first">Learning to code at Founders and Coders would represent, for me, a new beginning. I already have experience as a coder, but almost all of my time was spent at the same company, ploughing a narrower and narrower furrow and working in my final few years on a windows forms application solely for use in-house.</p>
+    <p class="second">I chose to step out of the workplace nearly two years ago when the company was taken over and a voluntary redundancy package was made available to the employees.</po the workplace, I have found it very difficult to get interviews, perhaps because of my age (50), and/or the length of time I have been out of work, and/or not being sufficiently abreast of the latest coding and working methodologies, and/or being entirely self-taught – I have no coding-related qualifications.</p>    
     <p>Now, I would like to make a fresh start, building once again from the ground up, but this time learning with others instead of on my own. It’s never too late - I hope.</p>
     <p>Evidence of my coding ability can be found on <a href="https://www.freecodecamp.org/synthome" target="_blank">freeCodeCamp</a> and <a href="https://www.codewars.com/users/synthome" target="_blank">CodeWars</a>.</p>
     <p>The repository for this website can be found on <a href="https://github.com/synthome/fac-app" target="_blank">GitHub</a>.</p>
