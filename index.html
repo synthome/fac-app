@@ -108,8 +108,9 @@
   * {box-sizing:border-box}
 
 :root {
-  --WIDTH: 150px;
-  --LINEHEIGHT: 20px;
+  --IMAGE_HALF_WIDTH: 150px;
+  --LINE_HEIGHT: 20px;
+  --BUTTON_HEIGHT: 40px;
 }
 
 body {
@@ -117,7 +118,7 @@ body {
 }
 
 p {
-  margin: var(--LINEHEIGHT) 0px 0px 0px;
+  margin: var(--LINE_HEIGHT) 0px 0px 0px;
   text-align:justify;
 }
 
@@ -135,18 +136,18 @@ a {
   border-radius: 10px;
   border: 1px solid grey;
   margin: 10px auto;
-  max-width: calc(6*var(--WIDTH));
-  line-height: var(--LINEHEIGHT);
+  max-width: calc(6*var(--IMAGE_HALF_WIDTH));
+  line-height: var(--LINE_HEIGHT);
 }
 
 #mugshot {
   float: left;
-  max-height: calc(9*var(--LINEHEIGHT));
+  max-height: calc(9*var(--LINE_HEIGHT));
   margin: 0px 20px 20px 0px;
 }
 
 .slideshow-container {
-  max-width: calc(5 * var(--WIDTH));
+  max-width: calc(5 * var(--IMAGE_HALF_WIDTH));
   position: relative;
   margin: auto;
   overflow: hidden;
@@ -157,23 +158,23 @@ a {
   position: absolute;
   top: 50%;
   left: 50%;
-  margin-left: -10px;
-  margin-top: -10px;
+  margin-left: calc(-1*var(--BUTTON_HEIGHT)/2);
+  margin-top: calc(-1*var(--BUTTON_HEIGHT)/2);
   box-sizing: border-box;
-  width: 20px;
-  height: 20px;
+  width: var(--BUTTON_HEIGHT);
+  height: var(--BUTTON_HEIGHT);
   border-color: transparent transparent transparent blue;
   opacity: 0.5;
 }
 
 .button.play {
   border-style: solid;
-  border-width: 10px 0px 10px 20px;
+  border-width: calc(var(--BUTTON_HEIGHT)/2) 0px calc(var(--BUTTON_HEIGHT)/2) var(--BUTTON_HEIGHT);
 }
 
 .button.pause {
   border-style: double;
-  border-width: 0px 0px 0px 20px;
+  border-width: 0px 0px 0px var(--BUTTON_HEIGHT);
 }
 
 .button.prev, .button.next {
@@ -181,24 +182,24 @@ a {
   cursor: pointer;
   position: absolute;
   top: 50%;
-  margin-top: -10px;
+  margin-top: calc(-1*var(--BUTTON_HEIGHT)/2);
   box-sizing: border-box;
-  width: 10px;
-  height: 20px;
+  width: calc(var(--BUTTON_HEIGHT)/2);
+  height: var(--BUTTON_HEIGHT);
   opacity: 0.5;
   border-style: solid;
 }
 
 .button.prev {
-  border-width: 10px 10px 10px 0px;
+  border-width: calc(var(--BUTTON_HEIGHT)/2) calc(var(--BUTTON_HEIGHT)/2) calc(var(--BUTTON_HEIGHT)/2) 0px;
   border-color: transparent blue transparent transparent;
-  left: calc(50% - var(--WIDTH) - 15px);
+  left: calc(50% - var(--IMAGE_HALF_WIDTH) - calc(var(--BUTTON_HEIGHT)/2) - 5px);
 }
 
 .button.next {
-  border-width: 10px 0px 10px 10px;
+  border-width: calc(var(--BUTTON_HEIGHT)/2) 0px calc(var(--BUTTON_HEIGHT)/2) calc(var(--BUTTON_HEIGHT)/2);
   border-color: transparent transparent transparent blue;
-  right: calc(50% - var(--WIDTH) - 15px);
+  right: calc(50% - var(--IMAGE_HALF_WIDTH) - calc(var(--BUTTON_HEIGHT)/2) - 5px);
 }
 
 #carousel-container {
@@ -209,24 +210,24 @@ a {
   padding-top: 0px;
 }
 #image-carousel {
-  width: calc(10*var(--WIDTH));
+  width: calc(10*var(--IMAGE_HALF_WIDTH));
   padding: 0;
   list-style: none;
   text-indent: 0;
   display: block;
-  margin-left: calc(50% - 5*var(--WIDTH));
+  margin-left: calc(50% - 5*var(--IMAGE_HALF_WIDTH));
   margin-top: 0px;
   margin-bottom: 0px;
   line-height: 0px;
 }
 #image-carousel li {
   float: left;
-  width: calc(2*var(--WIDTH));
+  width: calc(2*var(--IMAGE_HALF_WIDTH));
   position: relative;
   cursor: pointer;
 }
 #image-carousel img {
-  width: calc(2*var(--WIDTH));
+  width: calc(2*var(--IMAGE_HALF_WIDTH));
 }
 #image-carousel:after {
   visibility: hidden;
@@ -240,7 +241,7 @@ a {
   left: 0;
   top: 0;
   bottom: 0;
-  width: calc(50% - 3*var(--WIDTH));
+  width: calc(50% - 3*var(--IMAGE_HALF_WIDTH));
   z-index: 100;
   background-color: #ffffff;
 }
@@ -253,8 +254,8 @@ a {
   left: 0;
   top: 0;
   bottom: 0;
-  width: calc(2*var(--WIDTH));
-  margin-left: calc(50% - 3*var(--WIDTH));
+  width: calc(2*var(--IMAGE_HALF_WIDTH));
+  margin-left: calc(50% - 3*var(--IMAGE_HALF_WIDTH));
   z-index: 100;
   background-color: #ffffff;
   opacity: .6;
@@ -263,7 +264,7 @@ a {
   left: auto;
   margin-left: auto;
   right: 0;
-  margin-right: calc(50% - 3*var(--WIDTH));
+  margin-right: calc(50% - 3*var(--IMAGE_HALF_WIDTH));
 }
 </style>
 </head>
@@ -273,7 +274,7 @@ a {
     <p class="start">Learning to code at Founders and Coders would represent, for me, a new beginning. I already have experience as a coder, but almost all of my time was spent at the same company, ploughing a narrower and narrower furrow, working in my final few years on a windows forms application solely for use in-house. I chose to step out of the workplace nearly two years ago, when the company was taken over and a voluntary redundancy package was made available to the employees.</po the workplace, I have found it very difficult to get interviews, perhaps because of my age (50), and/or the length of time I have been out of work, and/or not being sufficiently abreast of the latest coding and working methodologies, and/or being entirely self-taught – I have no coding-related qualifications.</p>    
     <p>So, I would like to make a fresh start, building once again from the ground up, but this time learning with others instead of on my own.</p>
     <p>It’s never too late - I hope.</p>
-    <p>Evidence of my coding ability can be found on <a href="https://www.freecodecamp.org/synthome">freeCodeCamp</a> and <a href="https://www.codewars.com/users/synthome">CodeWars</a>.</p>
+    <p>Evidence of my coding ability can be found on <a href="https://www.freecodecamp.org/synthome" target="_blank">freeCodeCamp</a> and <a href="https://www.codewars.com/users/synthome" target="_blank">CodeWars</a>.</p>
   </div>
   <div id="carousel-container"  onclick="javascript:toggleButtons()">
     <div class="carousel-obscurer"></div>
